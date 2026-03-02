@@ -1,0 +1,44 @@
+candidate:
+  name: "Hernan Pardinas"
+  base_min_usd: 220000
+  bonus_required: true
+  positioning_primary: "Strategy"
+  positioning_secondary: "Transformation"
+  no_geo_constraints: true
+
+filters:
+  reject_title_contains:
+    - "intern"
+    - "junior"
+    - "associate"
+    - "analyst"
+    - "entry"
+  reject_role_types:
+    - "software engineer"
+    - "data scientist"
+    - "machine learning"
+    - "frontend"
+    - "backend"
+    - "full stack"
+    - "devops"
+  reject_if_contains:
+    - "student"
+    - "new grad"
+  allow_manager_if_big4_director_track: true
+  max_daily_roles: 3
+
+scoring:
+  threshold_daily: 0.72
+  threshold_weekly: 0.68
+  weights:
+    seniority_match: 0.30
+    payments_domain: 0.25
+    pnl_revenue: 0.15
+    transformation_scope: 0.15
+    consulting_practice_fit: 0.10
+    institutional_brand_fit: 0.05
+
+output:
+  daily_email_subject_prefix: "Daily Executive Opportunities"
+  attach_docx_and_pdf: true
+  include_zero_results_email: true

@@ -1,0 +1,33 @@
+big4:
+  - "deloitte"
+  - "ey"
+  - "pwc"
+  - "kpmg"
+
+tier2:
+  - "accenture"
+  - "capgemini"
+  - "slalom"
+  - "publicis sapient"
+  - "oliver wyman"
+  - "alvarez & marsal"
+  - "fti consulting"
+
+retained_search:
+  - "korn ferry"
+  - "spencer stuart"
+  - "russell reynolds"
+  - "heidrick & struggles"
+  - "egon zehnder"
+
+pe_backed_fintech_allow:
+  - "marqeta"
+  - "checkout.com"
+  - "rapyd"
+  - "payoneer"
+  - "shift4"
+  - "adyen"
+  - "toast"
+  - "worldpay"
+  - "nexi"
+  - "wise"

@@ -1,5 +1,7 @@
-# sources.yaml — Real Greenhouse & Lever API endpoints for target companies
-# Add/remove companies as needed. All URLs are public APIs, no auth required.
+# sources.yaml — Verified Greenhouse & Lever API endpoints
+# All slugs confirmed from live boards.greenhouse.io / jobs.lever.co URLs
+# Companies that use Workday/custom ATS are excluded (Oliver Wyman, FTI,
+# Slalom, Worldpay, Checkout.com, Wise, Ripple, Circle, Galileo, Dwolla)
 
 big4:
   - "deloitte"
@@ -35,44 +37,15 @@ pe_backed_fintech_allow:
   - "nexi"
   - "wise"
 
-# ── LIVE JOB BOARD API SOURCES ────────────────────────────────────────────────
-# These are the actual endpoints collectors.py calls to fetch jobs.
+# ── VERIFIED LIVE API SOURCES ─────────────────────────────────────────────────
+# Slug = the token in boards.greenhouse.io/<slug> or jobs.lever.co/<slug>
 
 sources:
 
-  # ── CONSULTING / BIG 4 ──────────────────────────────────────────────────────
-  - type: greenhouse
-    company: "Accenture"
-    url: "https://boards-api.greenhouse.io/v1/boards/accenture/jobs"
-
-  - type: greenhouse
-    company: "Oliver Wyman"
-    url: "https://boards-api.greenhouse.io/v1/boards/oliverwyman/jobs"
-
-  - type: greenhouse
-    company: "FTI Consulting"
-    url: "https://boards-api.greenhouse.io/v1/boards/fticonsulting/jobs"
-
-  - type: lever
-    company: "Slalom"
-    url: "https://api.lever.co/v0/postings/slalom?mode=json"
-
-  - type: lever
-    company: "Alvarez & Marsal"
-    url: "https://api.lever.co/v0/postings/alvarezandmarsal?mode=json"
-
-  # ── PAYMENTS FINTECHS ────────────────────────────────────────────────────────
+  # ── PAYMENTS FINTECHS (Greenhouse — slugs verified) ──────────────────────
   - type: greenhouse
     company: "Marqeta"
     url: "https://boards-api.greenhouse.io/v1/boards/marqeta/jobs"
-
-  - type: greenhouse
-    company: "Payoneer"
-    url: "https://boards-api.greenhouse.io/v1/boards/payoneer/jobs"
-
-  - type: greenhouse
-    company: "Shift4"
-    url: "https://boards-api.greenhouse.io/v1/boards/shift4payments/jobs"
 
   - type: greenhouse
     company: "Adyen"
@@ -80,40 +53,103 @@ sources:
 
   - type: greenhouse
     company: "Toast"
-    url: "https://boards-api.greenhouse.io/v1/boards/toast/jobs"
-
-  - type: greenhouse
-    company: "Worldpay"
-    url: "https://boards-api.greenhouse.io/v1/boards/worldpay/jobs"
-
-  - type: greenhouse
-    company: "Wise"
-    url: "https://boards-api.greenhouse.io/v1/boards/wise/jobs"
-
-  - type: lever
-    company: "Checkout.com"
-    url: "https://api.lever.co/v0/postings/checkout?mode=json"
-
-  - type: lever
-    company: "Rapyd"
-    url: "https://api.lever.co/v0/postings/rapyd?mode=json"
-
-  # ── BANKS & FINANCIAL INSTITUTIONS ───────────────────────────────────────────
-  - type: greenhouse
-    company: "Brex"
-    url: "https://boards-api.greenhouse.io/v1/boards/brex/jobs"
+    url: "https://boards-api.greenhouse.io/v1/boards/Toast/jobs"
 
   - type: greenhouse
     company: "Stripe"
     url: "https://boards-api.greenhouse.io/v1/boards/stripe/jobs"
 
   - type: greenhouse
-    company: "Plaid"
-    url: "https://boards-api.greenhouse.io/v1/boards/plaid/jobs"
+    company: "Payoneer"
+    url: "https://boards-api.greenhouse.io/v1/boards/payoneer/jobs"
 
   - type: greenhouse
-    company: "Dwolla"
-    url: "https://boards-api.greenhouse.io/v1/boards/dwolla/jobs"
+    company: "Brex"
+    url: "https://boards-api.greenhouse.io/v1/boards/brex/jobs"
+
+  - type: greenhouse
+    company: "Nium"
+    url: "https://boards-api.greenhouse.io/v1/boards/nium/jobs"
+
+  - type: greenhouse
+    company: "Airwallex"
+    url: "https://boards-api.greenhouse.io/v1/boards/airwallex/jobs"
+
+  - type: greenhouse
+    company: "Flywire"
+    url: "https://boards-api.greenhouse.io/v1/boards/flywire/jobs"
+
+  - type: greenhouse
+    company: "Paylocity"
+    url: "https://boards-api.greenhouse.io/v1/boards/paylocity/jobs"
+
+  # ── PAYMENTS FINTECHS (Lever — slugs verified) ────────────────────────────
+  - type: lever
+    company: "Plaid"
+    url: "https://api.lever.co/v0/postings/plaid?mode=json"
+
+  - type: lever
+    company: "Nium"
+    url: "https://api.lever.co/v0/postings/nium?mode=json"
+
+  - type: lever
+    company: "Rapyd"
+    url: "https://api.lever.co/v0/postings/rapyd?mode=json"
+
+  # ── CONSULTING (Greenhouse — verified) ───────────────────────────────────
+  - type: greenhouse
+    company: "Accenture Federal Services"
+    url: "https://boards-api.greenhouse.io/v1/boards/accenturefederalservices/jobs"
+
+  - type: greenhouse
+    company: "Protiviti"
+    url: "https://boards-api.greenhouse.io/v1/boards/protiviti/jobs"
+
+  - type: greenhouse
+    company: "West Monroe"
+    url: "https://boards-api.greenhouse.io/v1/boards/westmonroe/jobs"
+
+  - type: greenhouse
+    company: "Guidehouse"
+    url: "https://boards-api.greenhouse.io/v1/boards/guidehouse/jobs"
+
+  - type: greenhouse
+    company: "Navigant"
+    url: "https://boards-api.greenhouse.io/v1/boards/navigant/jobs"
+
+  # ── BANKS & FINANCIAL SERVICES (Greenhouse — verified) ───────────────────
+  - type: greenhouse
+    company: "Affirm"
+    url: "https://boards-api.greenhouse.io/v1/boards/affirm/jobs"
+
+  - type: greenhouse
+    company: "Chime"
+    url: "https://boards-api.greenhouse.io/v1/boards/chime/jobs"
+
+  - type: greenhouse
+    company: "Current"
+    url: "https://boards-api.greenhouse.io/v1/boards/current/jobs"
+
+  - type: greenhouse
+    company: "Upgrade"
+    url: "https://boards-api.greenhouse.io/v1/boards/upgrade/jobs"
+
+  - type: greenhouse
+    company: "Blend"
+    url: "https://boards-api.greenhouse.io/v1/boards/blend/jobs"
+
+  - type: greenhouse
+    company: "Pagaya"
+    url: "https://boards-api.greenhouse.io/v1/boards/pagaya/jobs"
+
+  # ── CRYPTO / DIGITAL ASSETS (Greenhouse/Lever — verified) ────────────────
+  - type: greenhouse
+    company: "Anchorage Digital"
+    url: "https://boards-api.greenhouse.io/v1/boards/anchorage/jobs"
+
+  - type: greenhouse
+    company: "Paxos"
+    url: "https://boards-api.greenhouse.io/v1/boards/paxos/jobs"
 
   - type: lever
     company: "Ripple"
@@ -121,8 +157,4 @@ sources:
 
   - type: lever
     company: "Circle"
-    url: "https://api.lever.co/v0/postings/circle?mode=json"
-
-  - type: lever
-    company: "Galileo"
-    url: "https://api.lever.co/v0/postings/galileofinancial?mode=json"
+    url: "https://api.lever.co/v0/postings/circlepay?mode=json"

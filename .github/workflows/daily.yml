@@ -1,19 +1,43 @@
-name: Executive Job Scan
+name: Executive Job Agent
 
 on:
+  # Runs every weekday at 7:00 AM Eastern (12:00 UTC)
   schedule:
-    - cron: "30 11 * * *"
+    - cron: "0 12 * * 1-5"
+
+  # Also allows manual trigger from GitHub Actions tab
   workflow_dispatch:
 
 jobs:
-  run:
+  run-agent:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: |
-          pip install -r requirements.txt
-      - run: |
-          python src/run_daily.py
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run job agent
+        env:
+          EMAIL_SENDER:   ${{ secrets.EMAIL_SENDER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
+        run: |
+          cd src
+          python main.py
+
+      - name: Commit seen_jobs.json (deduplication memory)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/seen_jobs.json || true
+          git diff --cached --quiet || git commit -m "chore: update seen jobs [skip ci]"
+          git push

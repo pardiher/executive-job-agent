@@ -1,8 +1,7 @@
 import re
 import requests
-import feedparser
 from dataclasses import dataclass
-from typing import List, Dict, Any
+from typing import List
 
 @dataclass
 class Job:
@@ -17,36 +16,48 @@ def clean_html(text):
     return re.sub("<[^>]+>", " ", text or "")
 
 def fetch_lever(url, company):
-    r = requests.get(url, timeout=30)
-    r.raise_for_status()
-    data = r.json()
-    jobs = []
-    for j in data:
-        jobs.append(Job(
-            "lever",
-            company,
-            j.get("text", ""),
-            j.get("categories", {}).get("location", ""),
-            j.get("hostedUrl", ""),
-            clean_html(j.get("description", ""))
-        ))
-    return jobs
+    try:
+        r = requests.get(url, timeout=30)
+        if r.status_code != 200:
+            print(f"Skipping Lever source {company}: {r.status_code}")
+            return []
+        data = r.json()
+        jobs = []
+        for j in data:
+            jobs.append(Job(
+                "lever",
+                company,
+                j.get("text", ""),
+                j.get("categories", {}).get("location", ""),
+                j.get("hostedUrl", ""),
+                clean_html(j.get("description", ""))
+            ))
+        return jobs
+    except Exception as e:
+        print(f"Lever error for {company}: {e}")
+        return []
 
 def fetch_greenhouse(url, company):
-    r = requests.get(url, timeout=30)
-    r.raise_for_status()
-    data = r.json()
-    jobs = []
-    for j in data.get("jobs", []):
-        jobs.append(Job(
-            "greenhouse",
-            company,
-            j.get("title", ""),
-            j.get("location", {}).get("name", ""),
-            j.get("absolute_url", ""),
-            clean_html(j.get("content", ""))
-        ))
-    return jobs
+    try:
+        r = requests.get(url, timeout=30)
+        if r.status_code != 200:
+            print(f"Skipping Greenhouse source {company}: {r.status_code}")
+            return []
+        data = r.json()
+        jobs = []
+        for j in data.get("jobs", []):
+            jobs.append(Job(
+                "greenhouse",
+                company,
+                j.get("title", ""),
+                j.get("location", {}).get("name", ""),
+                j.get("absolute_url", ""),
+                clean_html(j.get("content", ""))
+            ))
+        return jobs
+    except Exception as e:
+        print(f"Greenhouse error for {company}: {e}")
+        return []
 
 def collect_jobs(cfg):
     jobs = []

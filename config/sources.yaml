@@ -1,8 +1,128 @@
-sources:
-  - type: "lever"
-    company: "Stripe"
-    url: "https://api.lever.co/v0/postings/stripe?mode=json"
+# sources.yaml — Real Greenhouse & Lever API endpoints for target companies
+# Add/remove companies as needed. All URLs are public APIs, no auth required.
 
-  - type: "greenhouse"
-    company: "Airbnb"
-    url: "https://boards-api.greenhouse.io/v1/boards/airbnb/jobs"
+big4:
+  - "deloitte"
+  - "ey"
+  - "pwc"
+  - "kpmg"
+
+tier2:
+  - "accenture"
+  - "capgemini"
+  - "slalom"
+  - "publicis sapient"
+  - "oliver wyman"
+  - "alvarez & marsal"
+  - "fti consulting"
+
+retained_search:
+  - "korn ferry"
+  - "spencer stuart"
+  - "russell reynolds"
+  - "heidrick & struggles"
+  - "egon zehnder"
+
+pe_backed_fintech_allow:
+  - "marqeta"
+  - "checkout.com"
+  - "rapyd"
+  - "payoneer"
+  - "shift4"
+  - "adyen"
+  - "toast"
+  - "worldpay"
+  - "nexi"
+  - "wise"
+
+# ── LIVE JOB BOARD API SOURCES ────────────────────────────────────────────────
+# These are the actual endpoints collectors.py calls to fetch jobs.
+
+sources:
+
+  # ── CONSULTING / BIG 4 ──────────────────────────────────────────────────────
+  - type: greenhouse
+    company: "Accenture"
+    url: "https://boards-api.greenhouse.io/v1/boards/accenture/jobs"
+
+  - type: greenhouse
+    company: "Oliver Wyman"
+    url: "https://boards-api.greenhouse.io/v1/boards/oliverwyman/jobs"
+
+  - type: greenhouse
+    company: "FTI Consulting"
+    url: "https://boards-api.greenhouse.io/v1/boards/fticonsulting/jobs"
+
+  - type: lever
+    company: "Slalom"
+    url: "https://api.lever.co/v0/postings/slalom?mode=json"
+
+  - type: lever
+    company: "Alvarez & Marsal"
+    url: "https://api.lever.co/v0/postings/alvarezandmarsal?mode=json"
+
+  # ── PAYMENTS FINTECHS ────────────────────────────────────────────────────────
+  - type: greenhouse
+    company: "Marqeta"
+    url: "https://boards-api.greenhouse.io/v1/boards/marqeta/jobs"
+
+  - type: greenhouse
+    company: "Payoneer"
+    url: "https://boards-api.greenhouse.io/v1/boards/payoneer/jobs"
+
+  - type: greenhouse
+    company: "Shift4"
+    url: "https://boards-api.greenhouse.io/v1/boards/shift4payments/jobs"
+
+  - type: greenhouse
+    company: "Adyen"
+    url: "https://boards-api.greenhouse.io/v1/boards/adyen/jobs"
+
+  - type: greenhouse
+    company: "Toast"
+    url: "https://boards-api.greenhouse.io/v1/boards/toast/jobs"
+
+  - type: greenhouse
+    company: "Worldpay"
+    url: "https://boards-api.greenhouse.io/v1/boards/worldpay/jobs"
+
+  - type: greenhouse
+    company: "Wise"
+    url: "https://boards-api.greenhouse.io/v1/boards/wise/jobs"
+
+  - type: lever
+    company: "Checkout.com"
+    url: "https://api.lever.co/v0/postings/checkout?mode=json"
+
+  - type: lever
+    company: "Rapyd"
+    url: "https://api.lever.co/v0/postings/rapyd?mode=json"
+
+  # ── BANKS & FINANCIAL INSTITUTIONS ───────────────────────────────────────────
+  - type: greenhouse
+    company: "Brex"
+    url: "https://boards-api.greenhouse.io/v1/boards/brex/jobs"
+
+  - type: greenhouse
+    company: "Stripe"
+    url: "https://boards-api.greenhouse.io/v1/boards/stripe/jobs"
+
+  - type: greenhouse
+    company: "Plaid"
+    url: "https://boards-api.greenhouse.io/v1/boards/plaid/jobs"
+
+  - type: greenhouse
+    company: "Dwolla"
+    url: "https://boards-api.greenhouse.io/v1/boards/dwolla/jobs"
+
+  - type: lever
+    company: "Ripple"
+    url: "https://api.lever.co/v0/postings/ripple?mode=json"
+
+  - type: lever
+    company: "Circle"
+    url: "https://api.lever.co/v0/postings/circle?mode=json"
+
+  - type: lever
+    company: "Galileo"
+    url: "https://api.lever.co/v0/postings/galileofinancial?mode=json"

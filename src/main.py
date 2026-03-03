@@ -52,16 +52,20 @@ def passes_filters(job, profile):
 
 # ── SEEN JOBS DEDUPLICATION ───────────────────────────────────────────────────
 
-SEEN_FILE = "seen_jobs.json"
+def get_seen_file():
+    base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base, "src", "seen_jobs.json")
 
 def load_seen():
-    if os.path.exists(SEEN_FILE):
-        with open(SEEN_FILE) as f:
+    seen_file = get_seen_file()
+    if os.path.exists(seen_file):
+        with open(seen_file) as f:
             return set(json.load(f))
     return set()
 
 def save_seen(seen):
-    with open(SEEN_FILE, "w") as f:
+    seen_file = get_seen_file()
+    with open(seen_file, "w") as f:
         json.dump(list(seen), f)
 
 
@@ -146,8 +150,10 @@ def send_email(shortlisted, profile, threshold, today):
 
 def main():
     today   = date.today().isoformat()
-    profile = load_yaml("config/profile.yaml")
-    sources = load_yaml("config/sources.yaml")
+    # FIX: resolve paths from repo root, not working directory
+    base    = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    profile = load_yaml(os.path.join(base, "config", "profile.yaml"))
+    sources = load_yaml(os.path.join(base, "config", "sources.yaml"))
 
     threshold   = profile["scoring"]["threshold_daily"]
     weights     = profile["scoring"]["weights"]
